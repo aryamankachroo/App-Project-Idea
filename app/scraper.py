@@ -25,7 +25,7 @@ def fetch_arxiv_news():
         
         # Always parse as XML
         soup = BeautifulSoup(response.content, "xml")
-                items = soup.find_all("item")
+        items = soup.find_all("item")
         if not items:
             logger.warning("No <item> tags found in arXiv feed! Returning empty list.")
             return []
