@@ -23,21 +23,12 @@ def fetch_arxiv_news():
         response = requests.get(url)
         response.raise_for_status()
         
-        # Try different parsers in order of preference
-        for parser in ['lxml', 'xml', 'html.parser']:
-            try:
-                logger.info(f"Attempting to parse with {parser}")
-                soup = BeautifulSoup(response.content, parser)
+        # Always parse as XML
+        soup = BeautifulSoup(response.content, "xml")
                 items = soup.find_all("item")
-                
-                if items:
-                    logger.info(f"Successfully found {len(items)} items with {parser} parser")
-                    break
-            except Exception as e:
-                logger.error(f"Parser {parser} failed: {str(e)}")
-                continue
-        else:
-            raise ValueError("All parsers failed to find items")
+        if not items:
+            logger.warning("No <item> tags found in arXiv feed! Returning empty list.")
+            return []
 
         articles = []
         for item in items[:10]:

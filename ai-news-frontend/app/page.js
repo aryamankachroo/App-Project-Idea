@@ -24,10 +24,10 @@ export default function Home() {
       const isDark = localStorage.getItem('darkMode') === 'true';
       setDarkMode(isDark);
       if (isDark) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
     }
   }, []);
 
@@ -98,7 +98,7 @@ export default function Home() {
 
   const displayed = showFavorites ? articles.filter(article => favorites.includes(getArticleKey(article, 0))) : articles;
 
-  return (
+    return (
     <main className={`min-h-screen ${darkMode ? 'dark bg-gray-900' : 'bg-gray-50'} transition-colors`}>      
       {/* Navbar */}
       <header className="bg-white dark:bg-gray-800 shadow">
@@ -115,7 +115,7 @@ export default function Home() {
             </button>
             <button onClick={toggleDarkMode} className="p-2 rounded focus:outline-none" aria-label="Toggle dark mode">
               {darkMode ? <FiSun className="w-5 h-5 text-yellow-300" /> : <BsFillMoonFill className="w-5 h-5 text-white" />}
-            </button>
+                </button>
           </div>
         </div>
       </header>
@@ -123,34 +123,34 @@ export default function Home() {
       {/* Controls */}
       <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
         <div className="relative w-full sm:w-1/3">
-          <input
-            type="text"
-            value={searchTerm}
+                <input
+                  type="text"
+                  value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
-            onFocus={() => setIsSearchFocused(true)}
-            onBlur={() => setIsSearchFocused(false)}
+                  onFocus={() => setIsSearchFocused(true)}
+                  onBlur={() => setIsSearchFocused(false)}
             placeholder="Search articles..."
             className={`w-full pl-10 pr-4 py-2 rounded-lg border focus:outline-none ${isSearchFocused ? 'ring-2 ring-blue-500' : ''} dark:bg-gray-700 dark:border-gray-600 dark:text-white`}
-          />
+                />
           <svg className="absolute left-3 top-2.5 w-5 h-5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
-          {searchTerm && (
+                {searchTerm && (
             <button onClick={() => setSearchTerm('')} className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
-            </button>
-          )}
-        </div>
-        <select
-          value={sortBy}
+                  </button>
+                )}
+              </div>
+              <select
+                value={sortBy}
           onChange={e => setSortBy(e.target.value)}
           className="w-full sm:w-1/4 px-4 py-2 rounded-lg border dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none pr-8"
-        >
-          <option value="date">Latest</option>
-          <option value="title">Title</option>
-        </select>
+              >
+                <option value="date">Latest</option>
+                <option value="title">Title</option>
+              </select>
       </div>
 
       {/* Content */}
@@ -224,7 +224,7 @@ export default function Home() {
                       {favorites.includes(getArticleKey(article, idx))
                         ? <AiFillHeart className="w-5 h-5 text-red-500" />
                         : <AiOutlineHeart className="w-5 h-5 text-red-500" />}
-                    </button>
+            </button>
                     <button onClick={() => shareArticle(article)} className="p-1 rounded-full focus:outline-none">
                       <FiShare className={`${darkMode ? 'text-gray-300' : 'text-gray-700'} w-5 h-5`} />
                     </button>
